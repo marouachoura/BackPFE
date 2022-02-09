@@ -1,0 +1,13 @@
+package com.example.demo.dao;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.example.demo.entities.Employe;
+import com.example.demo.entities.Formation;
+
+public interface FormationRepository extends JpaRepository<Formation, Long>{
+	Employe findBynomFormationContaining(String NomPrenom );
+	Employe findBynomFormateurContaining(String NomPrenom );
+	
+
+}
