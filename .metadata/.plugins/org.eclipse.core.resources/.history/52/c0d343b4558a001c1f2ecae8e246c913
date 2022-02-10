@@ -1,0 +1,36 @@
+package com.example.demo;
+
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+import com.example.demo.dao.EmployeRepository;
+import com.example.demo.dao.FormationRepository;
+import com.example.demo.entities.Employe;
+
+@SpringBootApplication
+
+public class DemoApplication implements CommandLineRunner{
+
+	@Autowired
+	EmployeRepository employeRepository ;
+	@Autowired
+	FormationRepository formationRepository ;
+	public static void main(String[] args) {
+		SpringApplication.run(DemoApplication.class, args);
+	}
+
+	@Override
+	public void run(String... args) throws Exception {
+
+		Employe emp1 = new Employe("Maroua Choura", 111111, null, "maroua", "login123");
+		//Employe emp2 = new Employe("toutou", 222222, null, "toutou", "login123");
+		employeRepository.save(emp1);
+		//employeRepository.save(emp2);
+		
+		
+	}
+
+}

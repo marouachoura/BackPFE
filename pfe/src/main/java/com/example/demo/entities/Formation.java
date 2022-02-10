@@ -1,5 +1,6 @@
 package com.example.demo.entities;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
@@ -11,6 +12,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -25,7 +28,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @RequiredArgsConstructor
 @Table(name = "formations")
-public class Formation {
+public class Formation implements Serializable{
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	 private Long id ;
 	 @NonNull
@@ -39,6 +42,7 @@ public class Formation {
 	 @NonNull
 	 private Date duree ;
 	 @ManyToMany(mappedBy = "formations", fetch = FetchType.LAZY)
+	 @JsonIgnore
 	 private Collection<Employe> employes  = new ArrayList<>(); 
 
 

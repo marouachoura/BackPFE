@@ -1,5 +1,6 @@
 package com.example.demo.entities;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
@@ -16,6 +17,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -29,7 +32,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @RequiredArgsConstructor
 @Table(name = "employes")
-public class Employe {
+public class Employe implements Serializable {
  @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
  private Long id ;
  @NonNull
@@ -47,10 +50,11 @@ public class Employe {
          @JoinColumn(name = "employe_id", referencedColumnName = "id",
                  nullable = false, updatable = false)},
  inverseJoinColumns = {
-         @JoinColumn(name = "formation_id", referencedColumnName = "id",
-                 nullable = false, updatable = false)})
+         @JoinColumn(name = "formation_id", referencedColumnName = "id",  nullable = false, updatable = false)})
+ @JsonIgnore
  private Collection<Formation> formations  = new ArrayList<>() ;
  
+ @JsonIgnore
  @ManyToOne(fetch = FetchType.LAZY, optional = false)
  @JoinColumn(name = "site_id", nullable = false)
  private Site site;
