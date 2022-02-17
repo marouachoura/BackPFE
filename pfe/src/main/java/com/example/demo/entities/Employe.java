@@ -17,46 +17,146 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.NotFound;
+import org.hibernate.annotations.NotFoundAction;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
-import lombok.Setter; 
+import lombok.Setter;
 
 @Entity
-@Getter @Setter
-@NoArgsConstructor
-@AllArgsConstructor
-@RequiredArgsConstructor
+//@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 @Table(name = "employes")
 public class Employe implements Serializable {
- @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
- private Long id ;
- @NonNull
- private String nomPrenom ;
- @NonNull
- private int cin ;
- @NonNull
- private Date dateNais ;
- @NonNull
- private String login ;
- @NonNull
- private String password ;
- @ManyToMany (fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
- @JoinTable(name = "EmployeFormation", joinColumns = {
-         @JoinColumn(name = "employe_id", referencedColumnName = "id",
-                 nullable = false, updatable = false)},
- inverseJoinColumns = {
-         @JoinColumn(name = "formation_id", referencedColumnName = "id",  nullable = false, updatable = false)})
- @JsonIgnore
- private Collection<Formation> formations  = new ArrayList<>() ;
- 
- @JsonIgnore
- @ManyToOne(fetch = FetchType.LAZY, optional = false)
- @JoinColumn(name = "site_id", nullable = false)
- private Site site;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
+	@NonNull
+	private String nomPrenom;
+	@NonNull
+	private int cin;
+	@NonNull
+	private Date dateNais;
+	@NonNull
+	private String login;
+	@NonNull
+	private String password;
+	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+	@JoinTable(name = "EmployeFormation", joinColumns = {
+			@JoinColumn(name = "employe_id", referencedColumnName = "id", nullable = false, updatable = false) }, inverseJoinColumns = {
+					@JoinColumn(name = "formation_id", referencedColumnName = "id", nullable = false, updatable = false) })
+	//@JsonManagedReference 
+	//@JsonIgnoreProperties("employes") 
+	//@NotFound(action = NotFoundAction.IGNORE)
+	private Collection<Formation> formations = new ArrayList<>();
+
+	@ManyToOne(fetch = FetchType.LAZY, optional = false)
+	//@JsonBackReference (value="employes-movement")
+	@JoinColumn(name = "site_id", nullable = false)
+	private Site site;
+
+	public Employe() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	public Employe(@NonNull String nomPrenom, @NonNull int cin, @NonNull Date dateNais, @NonNull String login,
+			@NonNull String password) {
+		super();
+		this.nomPrenom = nomPrenom;
+		this.cin = cin;
+		this.dateNais = dateNais;
+		this.login = login;
+		this.password = password;
+	}
+
+	public Employe(Long id, @NonNull String nomPrenom, @NonNull int cin, @NonNull Date dateNais, @NonNull String login,
+			@NonNull String password, Collection<Formation> formations, Site site) {
+		super();
+		this.id = id;
+		this.nomPrenom = nomPrenom;
+		this.cin = cin;
+		this.dateNais = dateNais;
+		this.login = login;
+		this.password = password;
+		this.formations = formations;
+		this.site = site;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getNomPrenom() {
+		return nomPrenom;
+	}
+
+	public void setNomPrenom(String nomPrenom) {
+		this.nomPrenom = nomPrenom;
+	}
+
+	public int getCin() {
+		return cin;
+	}
+
+	public void setCin(int cin) {
+		this.cin = cin;
+	}
+
+	public Date getDateNais() {
+		return dateNais;
+	}
+
+	public void setDateNais(Date dateNais) {
+		this.dateNais = dateNais;
+	}
+
+	public String getLogin() {
+		return login;
+	}
+
+	public void setLogin(String login) {
+		this.login = login;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	@JsonManagedReference
+	public Collection<Formation> getFormations() {
+		return formations;
+	}
+
+	public void setFormations(Collection<Formation> formations) {
+		this.formations = formations;
+	}
+
+	@JsonBackReference
+	public Site getSite() {
+		return site;
+	}
+
+	public void setSite(Site site) {
+		this.site = site;
+	}
 
 }

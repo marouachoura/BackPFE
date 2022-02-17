@@ -13,7 +13,7 @@ public interface ICoucheService {
 		public Employe updateEmploye(Employe emp);
 		public Employe findEmploye(Long id);
 		public List<Employe> findAllEmployes();
-
+		//public Employe getFullEmployes();
 		// Filtrage par propriété Formations
 		public Employe findByNomPrenom(String NomPrenom);
 		public Employe findByDateNais(Date DateNais);

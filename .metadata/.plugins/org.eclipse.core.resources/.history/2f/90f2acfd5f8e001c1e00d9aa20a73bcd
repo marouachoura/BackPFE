@@ -1,0 +1,26 @@
+import java.util.stream.Collectors;
+
+import javax.persistence.EntityManager;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.data.rest.core.config.EnumTranslationConfiguration;
+import org.springframework.data.rest.core.config.MetadataConfiguration;
+import org.springframework.data.rest.core.config.ProjectionDefinitionConfiguration;
+import org.springframework.data.rest.core.config.RepositoryRestConfiguration;
+
+@Configuration
+public class MyRepositoryRestConfigurerAdapter extends RepositoryRestConfiguration {
+
+    public MyRepositoryRestConfigurerAdapter(ProjectionDefinitionConfiguration projectionConfiguration,
+			MetadataConfiguration metadataConfiguration, EnumTranslationConfiguration enumTranslationConfiguration) {
+		super(projectionConfiguration, metadataConfiguration, enumTranslationConfiguration);
+		// TODO Auto-generated constructor stub
+	}
+
+	@Autowired
+    private EntityManager entityManager;
+
+    
+
+}
