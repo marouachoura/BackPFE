@@ -40,7 +40,7 @@ public class Site implements Serializable{
 	 
 	@OneToMany(mappedBy = "site", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	//@JsonManagedReference (value="employes-movement")
-	@JsonManagedReference 
+	//@JsonManagedReference 
 	private Collection<Employe> employes = new ArrayList<>() ;
 
 
