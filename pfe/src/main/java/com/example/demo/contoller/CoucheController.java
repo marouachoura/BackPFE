@@ -34,6 +34,16 @@ public class CoucheController {
 
 	}
 	
+	@RequestMapping(value = "/employes/site/{id}", method = RequestMethod.GET)
+	public Site findSiteEmploye(@PathVariable Long id) {
+		return iService.findSiteEmploye(id);	
+	
+	}
+	@RequestMapping(value = "/employes/formations/{id}", method = RequestMethod.GET)
+	public List <Formation> findFormationsEmploye(@PathVariable Long id) {
+		return iService.findFormationsdEmploye(id);	
+	
+	}
 	
 	@PostMapping(value = "/employes/add")
 

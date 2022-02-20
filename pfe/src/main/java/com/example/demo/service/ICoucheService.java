@@ -33,6 +33,8 @@ public interface ICoucheService {
 		public Formation findByNomFormateur(String nomFormateur);
 		public List<Formation> findByNiveau(String nom);
 		
+		public List<Formation> findFormationsdEmploye(Long idemp);
+		
 		
 		// Crud sur les Sites 
 				public Site addSite(Site site);
@@ -40,5 +42,7 @@ public interface ICoucheService {
 				public Site updateSite(Site site);
 				public Site findSite(Long id);
 				public List<Site> findAllSites();
+				
+				public Site findSiteEmploye(Long idemp);
 
 }

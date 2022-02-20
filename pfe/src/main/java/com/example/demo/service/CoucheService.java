@@ -1,5 +1,6 @@
 package com.example.demo.service;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
@@ -150,6 +151,23 @@ public class CoucheService implements ICoucheService {
 		Site site = siteRepository.findById(idSite).get();
 		emp.setSite(site);
 		
+	}
+
+	@Override
+	public Site findSiteEmploye(Long idemp) {
+		Employe emp = employeRepository.findById(idemp).get();
+		Long id = emp.getSite().getId();
+		Site site = siteRepository.findById(id).get();
+		return site;
+	}
+
+	@Override
+	public List<Formation> findFormationsdEmploye(Long idemp) {
+		Employe emp = employeRepository.findById(idemp).get();
+		List <Formation> formationsEmp = (List<Formation>) emp.getFormations() ;
+		
+		return formationsEmp;
+	
 	}
 
 

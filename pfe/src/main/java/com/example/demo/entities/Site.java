@@ -18,6 +18,7 @@ import javax.persistence.Table;
 import org.hibernate.annotations.NotFound;
 import org.hibernate.annotations.NotFoundAction;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
@@ -40,7 +41,8 @@ public class Site implements Serializable{
 	 
 	@OneToMany(mappedBy = "site", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	//@JsonManagedReference (value="employes-movement")
-	@JsonManagedReference 
+	//@JsonManagedReference 
+	@JsonIgnore
 	private Collection<Employe> employes = new ArrayList<>() ;
 
 

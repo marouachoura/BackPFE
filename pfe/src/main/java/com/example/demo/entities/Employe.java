@@ -62,8 +62,9 @@ public class Employe implements Serializable {
 
 	@ManyToOne(fetch = FetchType.LAZY, optional = false)
 	//@JsonBackReference (value="employes-movement")
-	@JsonBackReference
-	@JoinColumn(name = "site_id", nullable = false)
+	//@JsonBackReference
+	@JsonIgnore
+	@JoinColumn(name = "site_id") //, nullable = false
 	private Site site;
 
 	public Employe() {

@@ -52,13 +52,17 @@ public class DemoApplication implements CommandLineRunner {
 		Formation formation1 = new Formation("deep Learning", "Ilyes manai", "M", "non certifier", new Date(3));
 
 		emp1.setSite(site1);
-		emp2.setSite(site1);
+		emp2.setSite(site2);
 		employeRepository.save(emp1);
 		employeRepository.save(emp2);
 		formationRepository.save(formation1);
 
 		coucheService.affectuerFormationToEmploye(emp1.getId(), formation1.getId());
 		coucheService.affectuerFormationToEmploye(emp2.getId(), formation1.getId());
+		System.out.println("marouaaa chouraaa") ;
+		System.out.println("marouaaa chouraaa") ;
+		System.out.println(coucheService.findEmploye(emp1.getId())) ;
+		 System.out.println(coucheService.findSiteEmploye(emp1.getId()).getNomSite());
 
 		// coucheService.affectuerSiteToEmploye(emp1.getId(), site1.getId());
 		// coucheService.affectuerSiteToEmploye(emp2.getId(), site1.getId());
