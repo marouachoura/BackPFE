@@ -16,11 +16,16 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import org.hibernate.annotations.NotFound;
 import org.hibernate.annotations.NotFoundAction;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonFormat.Shape;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -46,6 +51,7 @@ public class Employe implements Serializable {
 	@NonNull
 	private int cin;
 	@NonNull
+	@Temporal(TemporalType.DATE)
 	private Date dateNais;
 	@NonNull
 	private String login;
@@ -56,16 +62,17 @@ public class Employe implements Serializable {
 			@JoinColumn(name = "employe_id", referencedColumnName = "id", nullable = false, updatable = false) }, inverseJoinColumns = {
 					@JoinColumn(name = "formation_id", referencedColumnName = "id", nullable = false, updatable = false) })
 	//@JsonManagedReference 
-	//@JsonIgnoreProperties("employes") 
+	@JsonIgnoreProperties("employes") 
 	//@NotFound(action = NotFoundAction.IGNORE)
 	private Collection<Formation> formations = new ArrayList<>();
 
-	@ManyToOne(fetch = FetchType.LAZY, optional = false)
+	/*@ManyToOne(fetch = FetchType.LAZY, optional = false)
 	//@JsonBackReference (value="employes-movement")
 	//@JsonBackReference
 	@JsonIgnore
 	@JoinColumn(name = "site_id") //, nullable = false
-	private Site site;
+	private Site site;*/
+	private String site ;
 
 	public Employe() {
 		super();
@@ -82,8 +89,19 @@ public class Employe implements Serializable {
 		this.password = password;
 	}
 
+	public Employe(@NonNull String nomPrenom, @NonNull int cin, @NonNull Date dateNais, @NonNull String login,
+			@NonNull String password, String site) {
+		super();
+		this.nomPrenom = nomPrenom;
+		this.cin = cin;
+		this.dateNais = dateNais;
+		this.login = login;
+		this.password = password;
+		this.site = site;
+	}
+
 	public Employe(Long id, @NonNull String nomPrenom, @NonNull int cin, @NonNull Date dateNais, @NonNull String login,
-			@NonNull String password, Collection<Formation> formations, Site site) {
+			@NonNull String password, Collection<Formation> formations, String site) {
 		super();
 		this.id = id;
 		this.nomPrenom = nomPrenom;
@@ -143,7 +161,7 @@ public class Employe implements Serializable {
 		this.password = password;
 	}
 
-	@JsonManagedReference
+	//@JsonManagedReference
 	public Collection<Formation> getFormations() {
 		return formations;
 	}
@@ -152,13 +170,31 @@ public class Employe implements Serializable {
 		this.formations = formations;
 	}
 
-	@JsonBackReference
-	public Site getSite() {
+	public String getSite() {
+		return site;
+	}
+
+	public void setSite(String site) {
+		this.site = site;
+	}
+
+	/*public String toStringEmpl() {
+		return "Employe [nomPrenom=" + nomPrenom + ", cin=" + cin + ", dateNais=" + dateNais + ", login=" + login
+				+ ", password=" + password + ", formations=" + formations + ", site=" + site + ", getId()=" + getId()
+				+ ", getNomPrenom()=" + getNomPrenom() + ", getCin()=" + getCin() + ", getDateNais()=" + getDateNais()
+				+ ", getLogin()=" + getLogin() + ", getPassword()=" + getPassword() + ", getFormations()="
+				+ getFormations() + ", getSite()=" + getSite() + ", getClass()=" + getClass() + ", hashCode()="
+				+ hashCode() + ", toString()=" + super.toString() + "]";
+	}*/
+
+
+
+	/*public Site getSite() {
 		return site;
 	}
 
 	public void setSite(Site site) {
 		this.site = site;
 	}
-
+*/
 }

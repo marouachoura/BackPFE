@@ -20,7 +20,7 @@ public interface ICoucheService {
 		public Employe findByCin(int cin);
 
 		public void affectuerFormationToEmploye(Long idEmp,Long idFormation);
-		public void affectuerSiteToEmploye(Long idEmp,Long idSite);
+		//public void affectuerSiteToEmploye(Long idEmp,Long idSite);
 		
 		// Crud sur les Formations 
 		public Formation addFormation(Formation formation);
@@ -43,6 +43,6 @@ public interface ICoucheService {
 				public Site findSite(Long id);
 				public List<Site> findAllSites();
 				
-				public Site findSiteEmploye(Long idemp);
+				//public Site findSiteEmploye(Long idemp);
 
 }

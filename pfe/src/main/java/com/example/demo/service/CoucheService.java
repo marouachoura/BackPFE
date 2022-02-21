@@ -145,21 +145,21 @@ public class CoucheService implements ICoucheService {
 
 	}
 
-	@Override
+	/*@Override
 	public void affectuerSiteToEmploye(Long idEmp, Long idSite) {
 		Employe emp = employeRepository.findById(idEmp).get();
 		Site site = siteRepository.findById(idSite).get();
 		emp.setSite(site);
 		
-	}
+	}*/
 
-	@Override
+	/*@Override
 	public Site findSiteEmploye(Long idemp) {
 		Employe emp = employeRepository.findById(idemp).get();
 		Long id = emp.getSite().getId();
 		Site site = siteRepository.findById(id).get();
 		return site;
-	}
+	}*/
 
 	@Override
 	public List<Formation> findFormationsdEmploye(Long idemp) {

@@ -34,11 +34,11 @@ public class CoucheController {
 
 	}
 	
-	@RequestMapping(value = "/employes/site/{id}", method = RequestMethod.GET)
+	/*@RequestMapping(value = "/employes/site/{id}", method = RequestMethod.GET)
 	public Site findSiteEmploye(@PathVariable Long id) {
 		return iService.findSiteEmploye(id);	
 	
-	}
+	}*/
 	@RequestMapping(value = "/employes/formations/{id}", method = RequestMethod.GET)
 	public List <Formation> findFormationsEmploye(@PathVariable Long id) {
 		return iService.findFormationsdEmploye(id);	
@@ -49,17 +49,19 @@ public class CoucheController {
 
 	public Employe addEmploye(@RequestBody Employe e)
 	{
+		//System.out.println(e.toStringEmpl());
 		return iService.addEmploye(e);
+		
 	}
 	@RequestMapping(value = "/employes/find/{id}", method = RequestMethod.GET)
 	public Employe findEmployeByid(@PathVariable Long id) {
 		return iService.findEmploye(id);	
-		//Employe emp = iService.findEmploye(id);	
-		//Site site = emp.getSite();
-		//emp.setSite(site);
-		// Collection<Formation> formation = emp.getFormations();
-		// emp.setFormations(formation);
-		//return emp ;
+	
+	}
+	@DeleteMapping(value="/employes/delete/{id}")
+	public void deleteEmploye(@PathVariable Long id)
+	{
+		iService.deleteEmploye(id);
 	}
 
 	@RequestMapping(value = "/formations", method = RequestMethod.GET)
@@ -80,7 +82,7 @@ public class CoucheController {
 	}
 	
 	@DeleteMapping(value="/formations/delete/{id}")
-	public void deleteMembre(@PathVariable Long id)
+	public void deleteFormation(@PathVariable Long id)
 	{
 		iService.deleteFormation(id);
 	}

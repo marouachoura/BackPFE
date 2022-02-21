@@ -1,6 +1,6 @@
 package com.example.demo;
 
-import java.sql.Date;
+import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -47,14 +47,17 @@ public class DemoApplication implements CommandLineRunner {
 
 		Site site2 = new Site("tunis");
 		siteRepository.save(site2);
-		Employe emp1 = new Employe("Maroua Choura", 111111, new Date(3, 3, 2023), "maroua", "login123");
-		Employe emp2 = new Employe("toutou", 222222, new Date(3, 3, 2023), "toutou", "login123");
+		Employe emp1 = new Employe("Maroua Choura", 111111, new Date(), "maroua", "login123","Sfax");
+		Employe emp2 = new Employe("toutou", 222222, new Date(), "toutou", "login123","tunis");
+		Employe emp3 = new Employe("test", 222222, new Date(), "test", "login123","tunis");
+
 		Formation formation1 = new Formation("deep Learning", "Ilyes manai", "M", "non certifier", new Date(3));
 
-		emp1.setSite(site1);
-		emp2.setSite(site2);
+		//emp1.setSite(site1);
+		//emp2.setSite(site2);
 		employeRepository.save(emp1);
 		employeRepository.save(emp2);
+		employeRepository.save(emp3);
 		formationRepository.save(formation1);
 
 		coucheService.affectuerFormationToEmploye(emp1.getId(), formation1.getId());
@@ -62,7 +65,7 @@ public class DemoApplication implements CommandLineRunner {
 		System.out.println("marouaaa chouraaa") ;
 		System.out.println("marouaaa chouraaa") ;
 		System.out.println(coucheService.findEmploye(emp1.getId())) ;
-		 System.out.println(coucheService.findSiteEmploye(emp1.getId()).getNomSite());
+		// System.out.println(coucheService.findSiteEmploye(emp1.getId()).getNomSite());
 
 		// coucheService.affectuerSiteToEmploye(emp1.getId(), site1.getId());
 		// coucheService.affectuerSiteToEmploye(emp2.getId(), site1.getId());

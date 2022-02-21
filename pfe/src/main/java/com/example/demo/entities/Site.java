@@ -39,11 +39,11 @@ public class Site implements Serializable{
 	 private String nomSite ;
 	 
 	 
-	@OneToMany(mappedBy = "site", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+/*	@OneToMany(mappedBy = "site", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	//@JsonManagedReference (value="employes-movement")
 	//@JsonManagedReference 
 	@JsonIgnore
-	private Collection<Employe> employes = new ArrayList<>() ;
+	private Collection<Employe> employes = new ArrayList<>() ;*/
 
 
 	public Site() {
@@ -58,12 +58,12 @@ public class Site implements Serializable{
 	}
 
 
-	public Site(Long id, @NonNull String nomSite, Collection<Employe> employes) {
+	/*public Site(Long id, @NonNull String nomSite, Collection<Employe> employes) {
 		super();
 		this.id = id;
 		this.nomSite = nomSite;
 		this.employes = employes;
-	}
+	}*/
 
 
 	public Long getId() {
@@ -86,7 +86,7 @@ public class Site implements Serializable{
 	}
 
 
-	@JsonManagedReference
+/*	@JsonManagedReference
 	public Collection<Employe> getEmployes() {
 		return employes;
 	}
@@ -95,5 +95,5 @@ public class Site implements Serializable{
 	public void setEmployes(Collection<Employe> employes) {
 		this.employes = employes;
 	}
-	
+	*/
 }

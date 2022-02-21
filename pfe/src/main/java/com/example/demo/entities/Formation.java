@@ -12,12 +12,15 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import org.hibernate.annotations.NotFound;
 import org.hibernate.annotations.NotFoundAction;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
@@ -44,11 +47,13 @@ public class Formation implements Serializable {
 	@NonNull
 	private String certification;
 	@NonNull
+	@Temporal(TemporalType.DATE)
 	private Date duree;
 	@ManyToMany(mappedBy = "formations", fetch = FetchType.LAZY)
 	// @JsonBackReference(value="formations-movement")
 	//@JsonBackReference
 	//@NotFound(action = NotFoundAction.IGNORE)
+	@JsonIgnoreProperties("formations") 
 	private Collection<Employe> employes = new ArrayList<>();
 
 	public Formation() {
@@ -126,7 +131,7 @@ public class Formation implements Serializable {
 		this.duree = duree;
 	}
 
-	@JsonBackReference
+	//@JsonBackReference
 	public Collection<Employe> getEmployes() {
 		return employes;
 	}
