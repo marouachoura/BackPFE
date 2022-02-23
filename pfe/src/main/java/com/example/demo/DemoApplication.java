@@ -14,6 +14,8 @@ import com.example.demo.dao.SiteRepository;
 import com.example.demo.entities.Employe;
 import com.example.demo.entities.Formation;
 import com.example.demo.entities.Site;
+import com.example.demo.security.models.Role;
+import com.example.demo.security.repository.RoleRepository;
 import com.example.demo.service.ICoucheService;
 
 @SpringBootApplication
@@ -28,6 +30,8 @@ public class DemoApplication implements CommandLineRunner {
 	SiteRepository siteRepository;
 	@Autowired
 	ICoucheService coucheService;
+	@Autowired
+	RoleRepository roleRepository ;
 
 	 @Autowired
 	 RepositoryRestConfiguration configuration ;
@@ -41,6 +45,7 @@ public class DemoApplication implements CommandLineRunner {
 
 		// configuration.exposeIdsFor(Employe.class );
 		// configuration.exposeIdsFor(Formation.class);
+		//Role roleUser = new Role(ROLE_USER);
 
 		Site site1 = new Site("Sfax");
 		siteRepository.save(site1);

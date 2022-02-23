@@ -1,0 +1,11 @@
+package com.example.demo.request;
+
+import java.util.Set;
+
+public class Register {
+
+	private String name ;
+	private String login ;
+	private Set<String> role ;
+	
+}
