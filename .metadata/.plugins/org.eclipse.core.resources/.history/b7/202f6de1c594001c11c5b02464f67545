@@ -30,7 +30,7 @@ public class CoucheController {
 	@Autowired
 	ICoucheService iService ;
 	
-	@PreAuthorize("hasRole('ROLE_ADMIN')")
+	//@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@RequestMapping(value = "/employes", method = RequestMethod.GET)
 	public List<Employe> findAllEmp() {
 		return iService.findAllEmployes();
