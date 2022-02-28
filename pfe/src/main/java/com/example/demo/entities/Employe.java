@@ -19,18 +19,8 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import org.hibernate.annotations.NotFound;
-import org.hibernate.annotations.NotFoundAction;
-import org.springframework.format.annotation.DateTimeFormat;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonFormat.Shape;
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -66,13 +56,14 @@ public class Employe implements Serializable {
 	//@NotFound(action = NotFoundAction.IGNORE)
 	private Collection<Formation> formations = new ArrayList<>();
 
-	/*@ManyToOne(fetch = FetchType.LAZY, optional = false)
+	@ManyToOne(fetch = FetchType.LAZY, optional = false)
 	//@JsonBackReference (value="employes-movement")
 	//@JsonBackReference
-	@JsonIgnore
+	//@JsonIgnore
 	@JoinColumn(name = "site_id") //, nullable = false
-	private Site site;*/
-	private String site ;
+	@JsonIgnoreProperties("employes") 
+	private Site site;
+	//private String site ;
 
 	public Employe() {
 		super();
@@ -90,7 +81,7 @@ public class Employe implements Serializable {
 	}
 
 	public Employe(@NonNull String nomPrenom, @NonNull int cin, @NonNull Date dateNais, @NonNull String login,
-			@NonNull String password, String site) {
+			@NonNull String password, Site site) {
 		super();
 		this.nomPrenom = nomPrenom;
 		this.cin = cin;
@@ -101,7 +92,7 @@ public class Employe implements Serializable {
 	}
 
 	public Employe(Long id, @NonNull String nomPrenom, @NonNull int cin, @NonNull Date dateNais, @NonNull String login,
-			@NonNull String password, Collection<Formation> formations, String site) {
+			@NonNull String password, Collection<Formation> formations, Site site) {
 		super();
 		this.id = id;
 		this.nomPrenom = nomPrenom;
@@ -170,13 +161,13 @@ public class Employe implements Serializable {
 		this.formations = formations;
 	}
 
-	public String getSite() {
+/*	public String getSite() {
 		return site;
 	}
 
 	public void setSite(String site) {
 		this.site = site;
-	}
+	}*/
 
 	/*public String toStringEmpl() {
 		return "Employe [nomPrenom=" + nomPrenom + ", cin=" + cin + ", dateNais=" + dateNais + ", login=" + login
@@ -189,12 +180,12 @@ public class Employe implements Serializable {
 
 
 
-	/*public Site getSite() {
+	public Site getSite() {
 		return site;
 	}
 
 	public void setSite(Site site) {
 		this.site = site;
 	}
-*/
+
 }

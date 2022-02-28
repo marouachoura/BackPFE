@@ -1,6 +1,11 @@
 package com.example.demo.security.models;
 
+import java.util.ArrayList;
+import java.util.Collection;
+
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name = "roles")
@@ -11,6 +16,9 @@ public class Role {
 	@Enumerated(EnumType.STRING)
 	@Column(length = 20)
 	private ERole name;
+	@ManyToMany(mappedBy = "roles", fetch = FetchType.LAZY)
+	@JsonIgnoreProperties("roles") 
+	private Collection<User> users = new ArrayList<>();
 	public Role() {
 	}
 	public Role(ERole name) {

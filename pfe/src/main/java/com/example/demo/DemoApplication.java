@@ -14,8 +14,11 @@ import com.example.demo.dao.SiteRepository;
 import com.example.demo.entities.Employe;
 import com.example.demo.entities.Formation;
 import com.example.demo.entities.Site;
+import com.example.demo.security.models.ERole;
 import com.example.demo.security.models.Role;
+import com.example.demo.security.models.User;
 import com.example.demo.security.repository.RoleRepository;
+import com.example.demo.security.repository.UserRepository;
 import com.example.demo.service.ICoucheService;
 
 @SpringBootApplication
@@ -32,7 +35,10 @@ public class DemoApplication implements CommandLineRunner {
 	ICoucheService coucheService;
 	@Autowired
 	RoleRepository roleRepository ;
+	@Autowired
+	UserRepository userRepository ;
 
+	
 	 @Autowired
 	 RepositoryRestConfiguration configuration ;
 	public static void main(String[] args) {
@@ -45,24 +51,37 @@ public class DemoApplication implements CommandLineRunner {
 
 		// configuration.exposeIdsFor(Employe.class );
 		// configuration.exposeIdsFor(Formation.class);
-		//Role roleUser = new Role(ROLE_USER);
+		Role roleAdmin = new Role(ERole.ROLE_ADMIN);
+		Role roleUser = new Role(ERole.ROLE_USER);
+		Role roleMod = new Role(ERole.ROLE_MODERATOR);
+		roleRepository.save(roleAdmin);
+		roleRepository.save(roleUser);
+		roleRepository.save(roleMod);
 
+		//User user = new User("admin2","admin.admin@enis.tn","123456789");
+		//Set<Role> roles = new HashSet<>( ) ;
+	//	roles.
+        //user.setRoles(ERole.ROLE_ADMIN);
+		
 		Site site1 = new Site("Sfax");
 		siteRepository.save(site1);
 
 		Site site2 = new Site("tunis");
 		siteRepository.save(site2);
-		Employe emp1 = new Employe("Maroua Choura", 111111, new Date(), "maroua", "login123","Sfax");
+		Employe emp1 = new Employe("Maroua Choura", 111111, new Date(), "maroua", "login123");
+		Employe emp2 = new Employe("toutou", 222222, new Date(), "toutou", "login123");
+	//	Employe emp3 = new Employe("test", 222222, new Date(), "test", "login123");
+		/*Employe emp1 = new Employe("Maroua Choura", 111111, new Date(), "maroua", "login123","Sfax");
 		Employe emp2 = new Employe("toutou", 222222, new Date(), "toutou", "login123","tunis");
-		Employe emp3 = new Employe("test", 222222, new Date(), "test", "login123","tunis");
+		Employe emp3 = new Employe("test", 222222, new Date(), "test", "login123","tunis");*/
 
 		Formation formation1 = new Formation("deep Learning", "Ilyes manai", "M", "non certifier", new Date(3));
 
-		//emp1.setSite(site1);
-		//emp2.setSite(site2);
+		emp1.setSite(site1);
+		emp2.setSite(site2);
 		employeRepository.save(emp1);
 		employeRepository.save(emp2);
-		employeRepository.save(emp3);
+		//employeRepository.save(emp3);
 		formationRepository.save(formation1);
 
 		coucheService.affectuerFormationToEmploye(emp1.getId(), formation1.getId());
