@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -18,35 +20,37 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.UniqueConstraint;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
-
+import com.example.demo.security.models.Role;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
+
 
 @Entity
 //@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
-@Table(name = "employes")
+@Table(name = "employes" , uniqueConstraints = { 
+		@UniqueConstraint(columnNames = "username"),
+		@UniqueConstraint(columnNames = "email")} 
+	)
 public class Employe implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	@NonNull
+	//@NonNull
 	private String nomPrenom;
-	@NonNull
+	//@NonNull
 	private int cin;
-	@NonNull
+	//@NonNull
 	@Temporal(TemporalType.DATE)
 	private Date dateNais;
-	@NonNull
+//	@NonNull
 	private String login;
-	@NonNull
-	private String password;
+	//@NonNull
+	//private String password;
 	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
 	@JoinTable(name = "EmployeFormation", joinColumns = {
 			@JoinColumn(name = "employe_id", referencedColumnName = "id", nullable = false, updatable = false) }, inverseJoinColumns = {
@@ -65,12 +69,82 @@ public class Employe implements Serializable {
 	private Site site;
 	//private String site ;
 
+	
+	@NotBlank
+	@Size(max = 20)
+	private String username;
+	@NotBlank
+	@Size(max = 50)
+	@Email
+	private String email;
+	@NotBlank
+	@Size(max = 120)
+	private String password;
+	@ManyToMany(fetch = FetchType.LAZY)
+	@JoinTable(	name = "user_roles", 
+			 joinColumns = {
+						@JoinColumn(name = "user_id", referencedColumnName = "id", nullable = false, updatable = false) }, inverseJoinColumns = {
+						@JoinColumn(name = "role_id", referencedColumnName = "id", nullable = false, updatable = false) }
+				)
+	private Set<Role> roles = new HashSet<>();
+	
+	
+	
 	public Employe() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+	
 
 	public Employe(@NonNull String nomPrenom, @NonNull int cin, @NonNull Date dateNais, @NonNull String login,
+			 @NotBlank @Size(max = 20) String username,
+			@NotBlank @Size(max = 50) @Email String email, @NotBlank @Size(max = 120) String password) {
+		super();
+		this.nomPrenom = nomPrenom;
+		this.cin = cin;
+		this.dateNais = dateNais;
+		this.login = login;
+		//this.formations = formations;
+	//	this.site = site;
+		this.username = username;
+		this.email = email;
+		this.password = password;
+		//this.roles = roles;
+	}
+	
+	public Employe(String nomPrenom, int cin, Date dateNais, String login, Site site,
+			@NotBlank @Size(max = 20) String username, @NotBlank @Size(max = 50) @Email String email,
+			@NotBlank @Size(max = 120) String password) {
+		super();
+		this.nomPrenom = nomPrenom;
+		this.cin = cin;
+		this.dateNais = dateNais;
+		this.login = login;
+		this.site = site;
+		this.username = username;
+		this.email = email;
+		this.password = password;
+		
+	}
+
+
+	public Employe(@NotBlank @Size(max = 20) String username, @NotBlank @Size(max = 50) @Email String email,
+			@NotBlank @Size(max = 120) String password) {
+		super();
+		this.username = username;
+		this.email = email;
+		this.password = password;
+	}
+	public Employe(@NotBlank @Size(max = 20) String username, @NotBlank @Size(max = 50) @Email String email,
+			@NotBlank @Size(max = 120) String password ,  Site site) {
+		super();
+		this.username = username;
+		this.email = email;
+		this.password = password;
+		this.site = site ;
+	}
+
+	/*public Employe(@NonNull String nomPrenom, @NonNull int cin, @NonNull Date dateNais, @NonNull String login,
 			@NonNull String password) {
 		super();
 		this.nomPrenom = nomPrenom;
@@ -102,7 +176,10 @@ public class Employe implements Serializable {
 		this.password = password;
 		this.formations = formations;
 		this.site = site;
-	}
+	}*/
+
+
+
 
 	public Long getId() {
 		return id;
@@ -186,6 +263,27 @@ public class Employe implements Serializable {
 
 	public void setSite(Site site) {
 		this.site = site;
+	}
+	
+	
+	
+	public String getUsername() {
+		return username;
+	}
+	public void setUsername(String username) {
+		this.username = username;
+	}
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	public Set<Role> getRoles() {
+		return roles;
+	}
+	public void setRoles(Set<Role> roles) {
+		this.roles = roles;
 	}
 
 }

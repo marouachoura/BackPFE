@@ -10,7 +10,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.example.demo.security.models.RefreshToken;
 import com.example.demo.security.repository.RefreshTokenRepository;
-import com.example.demo.security.repository.UserRepository;
+//import com.example.demo.security.repository.UserRepository;
+import com.example.demo.dao.EmployeRepository;
 import com.example.demo.security.*;
 @Service
 public class RefreshTokenService {
@@ -21,7 +22,7 @@ public class RefreshTokenService {
 	  private RefreshTokenRepository refreshTokenRepository;
 
 	  @Autowired
-	  private UserRepository userRepository;
+	  private EmployeRepository userRepository;
 
 	  public Optional<RefreshToken> findByToken(String token) {
 	    return refreshTokenRepository.findByToken(token);

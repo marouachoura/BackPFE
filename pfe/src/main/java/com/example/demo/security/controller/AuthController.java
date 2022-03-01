@@ -18,13 +18,16 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.demo.security.repository.* ;
+//import com.example.demo.security.repository.* ;
+import com.example.demo.dao.EmployeRepository;
+import com.example.demo.entities.Employe;
 import com.example.demo.security.TokenRefreshException;
 import com.example.demo.security.jwt.* ;
 import com.example.demo.security.models.* ;
 import com.example.demo.security.services.* ;
 import com.example.demo.security.request.* ;
 import com.example.demo.security.response.* ;
+import com.example.demo.security.repository.RoleRepository ;
 
 
 @CrossOrigin(origins = "*", maxAge = 3600)
@@ -34,7 +37,8 @@ public class AuthController {
 	@Autowired
 	AuthenticationManager authenticationManager;
 	@Autowired
-	UserRepository userRepository;
+	EmployeRepository userRepository ;
+	//UserRepository userRepository;
 	@Autowired
 	RoleRepository roleRepository;
 	@Autowired
@@ -77,9 +81,9 @@ public class AuthController {
 	    }
 
 	    // Create new user's account
-	    User user = new User(signUpRequest.getUsername(), signUpRequest.getEmail(),
-	        encoder.encode(signUpRequest.getPassword()));
-
+	   // Employe user = new Employe(signUpRequest.getUsername(), signUpRequest.getEmail(), encoder.encode(signUpRequest.getPassword()));
+	    //Employe user = new Employe(signUpRequest.getUsername() , signUpRequest.getEmail(),encoder.encode(signUpRequest.getPassword()), signUpRequest.getSite());
+	    Employe user = new Employe(signUpRequest.getNomPrenom(),signUpRequest.getCin(),signUpRequest.getDateNais(),signUpRequest.getLogin(),signUpRequest.getSite(),signUpRequest.getUsername() , signUpRequest.getEmail(),encoder.encode(signUpRequest.getPassword()));
 	    Set<String> strRoles = signUpRequest.getRole();
 	    Set<Role> roles = new HashSet<>();
 
@@ -111,7 +115,9 @@ public class AuthController {
 	    }
 
 	    user.setRoles(roles);
+	   // userRepository.save(user);
 	    userRepository.save(user);
+	    
 
 	    return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
 	  }

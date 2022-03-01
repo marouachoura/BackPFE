@@ -2,6 +2,8 @@ package com.example.demo.security.models;
 
 import java.time.Instant;
 import javax.persistence.*;
+
+import com.example.demo.entities.Employe;
 @Entity(name = "refreshtoken")
 public class RefreshToken {
   @Id
@@ -9,7 +11,7 @@ public class RefreshToken {
   private long id;
   @OneToOne
   @JoinColumn(name = "user_id", referencedColumnName = "id")
-  private User user;
+  private Employe user;
   @Column(nullable = false, unique = true)
   private String token;
   @Column(nullable = false)
@@ -20,10 +22,10 @@ public long getId() {
 public void setId(long id) {
 	this.id = id;
 }
-public User getUser() {
+public Employe getUser() {
 	return user;
 }
-public void setUser(User user) {
+public void setUser(Employe user) {
 	this.user = user;
 }
 public String getToken() {

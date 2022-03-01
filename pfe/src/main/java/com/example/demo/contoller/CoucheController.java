@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.entities.Employe;
@@ -102,11 +103,33 @@ public class CoucheController {
 
 	}
 
-	@RequestMapping(value = "/sites/{id}", method = RequestMethod.GET)
+	@RequestMapping(value = "/sites/find/{id}", method = RequestMethod.GET)
 	public Site findSitesById(@PathVariable Long id) {
 		return iService.findSite(id);
 
 	}
+	@DeleteMapping(value="/sites/delete/{id}")
+	public void deleteSite(@PathVariable Long id)
+	{
+		iService.deleteSite(id);
+	}
 
+	@PostMapping(value = "/sites/add")
+
+	public Site addSite(@RequestBody Site site)
+	{
+		return iService.addSite(site);
+	}
+	@PutMapping(value="/sites/update/{id}")
+	public Site updateSite(@PathVariable Long id, @RequestBody Site site)
+	{
+		site.setId(id);
+		return iService.updateSite(site);
+	}
+	
+	@PutMapping(value = "/employes/{idemp}/formations/{idformation}")
+	public void affecter(@PathVariable(value = "idemp")  Long idemp, @PathVariable(value = "idformation")  Long idformation) {
+		 iService.affectuerFormationToEmploye(idemp, idformation);
+	}
 	
 }

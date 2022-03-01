@@ -1,4 +1,4 @@
-package com.example.demo.security.models;
+/*package com.example.demo.security.models;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -69,3 +69,4 @@ public class User {
 		this.roles = roles;
 	}
 }
+*/

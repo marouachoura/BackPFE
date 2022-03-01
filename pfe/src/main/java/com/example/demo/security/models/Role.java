@@ -5,6 +5,7 @@ import java.util.Collection;
 
 import javax.persistence.*;
 
+import com.example.demo.entities.Employe;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
@@ -18,7 +19,7 @@ public class Role {
 	private ERole name;
 	@ManyToMany(mappedBy = "roles", fetch = FetchType.LAZY)
 	@JsonIgnoreProperties("roles") 
-	private Collection<User> users = new ArrayList<>();
+	private Collection<Employe> users = new ArrayList<>();
 	public Role() {
 	}
 	public Role(ERole name) {
