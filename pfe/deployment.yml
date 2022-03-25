@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: back-deployment
+  labels:
+    app: pfe
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: pfe
+  template:
+    metadata:
+      labels:
+        app: pfe
+    spec:
+      containers:
+      - name: spring-artifact
+        image: maroua20/spring-artifact
+        args:
+         - touch /tmp/healthy; sleep 30; rm -rf /tmp/healthy; sleep 600       
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8080
