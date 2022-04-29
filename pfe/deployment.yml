@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: spring-artifact
-        image: maroua20/spring-artifact
+        image: maroua20/spring-image-jenkins:latest
         args:
          - touch /tmp/healthy; sleep 30; rm -rf /tmp/healthy; sleep 600       
         imagePullPolicy: Always
