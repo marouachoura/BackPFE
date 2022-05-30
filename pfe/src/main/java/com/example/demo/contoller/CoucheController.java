@@ -108,7 +108,7 @@ public class CoucheController {
 		return iService.updateFormation(f);
 	}
 
-	@PreAuthorize("hasRole('ROLE_USER' ) or hasRole('ROLE_ADMIN') ")
+	//@PreAuthorize("hasRole('ROLE_USER' ) or hasRole('ROLE_ADMIN') ")
 	@RequestMapping(value = "/sites", method = RequestMethod.GET)
 	public List<Site> findAllSites() {
 		return iService.findAllSites();
@@ -122,14 +122,14 @@ public class CoucheController {
 
 	}
 	
-	@PreAuthorize("hasRole('ROLE_USER' ) or hasRole('ROLE_ADMIN') ")
+	//@PreAuthorize("hasRole('ROLE_USER' ) or hasRole('ROLE_ADMIN') ")
 	@DeleteMapping(value="/sites/delete/{id}")
 	public void deleteSite(@PathVariable Long id)
 	{
 		iService.deleteSite(id);
 	}
 
-	@PreAuthorize("hasRole('ROLE_USER' ) or hasRole('ROLE_ADMIN') ")
+	//@PreAuthorize("hasRole('ROLE_USER' ) or hasRole('ROLE_ADMIN') ")
 	@PostMapping(value = "/sites/add")
 
 	public Site addSite(@RequestBody Site site)
@@ -137,7 +137,7 @@ public class CoucheController {
 		return iService.addSite(site);
 	}
 
-	@PreAuthorize("hasRole('ROLE_USER' ) or hasRole('ROLE_ADMIN') ")
+	//@PreAuthorize("hasRole('ROLE_USER' ) or hasRole('ROLE_ADMIN') ")
 	@PutMapping(value="/sites/update/{id}")
 	public Site updateSite(@PathVariable Long id, @RequestBody Site site)
 	{
@@ -146,7 +146,7 @@ public class CoucheController {
 	}
 	
 
-	@PreAuthorize("hasRole('ROLE_USER' ) or hasRole('ROLE_ADMIN') ")
+	//@PreAuthorize("hasRole('ROLE_USER' ) or hasRole('ROLE_ADMIN') ")
 	@PutMapping(value = "/employes/{idemp}/formations/{idformation}")
 	public void affecter(@PathVariable(value = "idemp")  Long idemp, @PathVariable(value = "idformation")  Long idformation) {
 		 iService.affectuerFormationToEmploye(idemp, idformation);
