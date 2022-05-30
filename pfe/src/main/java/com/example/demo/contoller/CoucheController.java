@@ -115,7 +115,7 @@ public class CoucheController {
 
 	}
 	
-	@PreAuthorize("hasRole('ROLE_USER' ) or hasRole('ROLE_ADMIN') ")
+	//@PreAuthorize("hasRole('ROLE_USER' ) or hasRole('ROLE_ADMIN') ")
 	@RequestMapping(value = "/sites/find/{id}", method = RequestMethod.GET)
 	public Site findSitesById(@PathVariable Long id) {
 		return iService.findSite(id);
