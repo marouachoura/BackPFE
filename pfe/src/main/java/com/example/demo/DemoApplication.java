@@ -3,6 +3,7 @@ package com.example.demo;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -40,12 +41,19 @@ public class DemoApplication implements CommandLineRunner {
 	RoleRepository roleRepository ;
 	@Autowired
 	PasswordEncoder encoder;
-	
+	public static ArrayList<Long> list = new ArrayList<Long>() ;
 	
 	 @Autowired
 	 RepositoryRestConfiguration configuration ;
 	public static void main(String[] args) {
 		SpringApplication.run(DemoApplication.class, args);
+		
+		while(true){ for ( Long i=0 ;i<1000000; i++) 
+
+			list.add(" "+i) ;
+
+		 }
+                 
 
 	}
 
