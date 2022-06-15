@@ -22,6 +22,8 @@ import com.example.demo.entities.Employe;
 import com.example.demo.entities.Formation;
 import com.example.demo.entities.Site;
 import com.example.demo.service.ICoucheService;
+import java.lang.Thread;
+
 
 @RestController 
 @CrossOrigin
@@ -34,8 +36,16 @@ public class CoucheController {
 	@PreAuthorize("hasRole('ROLE_USER' ) or hasRole('ROLE_ADMIN') ")
 	@RequestMapping(value = "/employes", method = RequestMethod.GET)
 	public List<Employe> findAllEmp() {
-		return iService.findAllEmployes();
+		try {
+			Thread.sleep(1000);	
+		 }
+		catch (Exception e) {
+           
+            	  // catching the exception
+          	  System.out.println(e);
+        }
 
+		 return iService.findAllEmployes();
 	}
 	
 	/*@RequestMapping(value = "/employes/site/{id}", method = RequestMethod.GET)
@@ -76,7 +86,17 @@ public class CoucheController {
 	@PreAuthorize("hasRole('ROLE_USER' ) or hasRole('ROLE_ADMIN') ")
 	@RequestMapping(value = "/formations", method = RequestMethod.GET)
 	public List<Formation> findAllFormations() {
+
+		 try {
+                        Thread.sleep(10000);
+                          }
+                catch (Exception e) {
+
+                  // catching the exception
+                  System.out.println(e);
+        }
 		return iService.findAllFormations();
+		
 	}
 	
 	@PreAuthorize("hasRole('ROLE_USER' ) or hasRole('ROLE_ADMIN') ")
