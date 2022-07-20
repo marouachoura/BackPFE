@@ -36,14 +36,14 @@ public class CoucheController {
 	@PreAuthorize("hasRole('ROLE_USER' ) or hasRole('ROLE_ADMIN') ")
 	@RequestMapping(value = "/employes", method = RequestMethod.GET)
 	public List<Employe> findAllEmp() {
-		try {
-			Thread.sleep(1000);	
+		//try {
+		//	Thread.sleep(1000);	
 		 }
-		catch (Exception e) {
+		//catch (Exception e) {
            
             	  // catching the exception
-          	  System.out.println(e);
-        }
+          	  //System.out.println(e);
+       // }
 
 		//try {
 		//boolean condition = true ;
