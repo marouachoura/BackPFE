@@ -48,14 +48,14 @@ public class DemoApplication implements CommandLineRunner {
 	public static void main(String[] args) {
 		SpringApplication.run(DemoApplication.class, args);
 		
-		//while(true){ for ( long i=0 ;i<1000000; i++) 
+		//while(true)
+                 // { for ( long i=0 ;i<1000000; i++) 
 
 			//list.add(" "+i) ;
 
-		 //}
-                 
+		 //}                 
 
-	//}
+	}
 
 	@Override
 	public void run(String... args) throws Exception {
