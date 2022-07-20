@@ -38,7 +38,7 @@ public class CoucheController {
 	public List<Employe> findAllEmp() {
 		//try {
 		//	Thread.sleep(1000);	
-		 }
+		// }
 		//catch (Exception e) {
            
             	  // catching the exception
