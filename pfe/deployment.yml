@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: back-deployment
+  name: back-deployment-jenkins
   labels:
     app: pfe
 spec:
@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: spring-artifact
-        image: maroua20/spring-image-jenkins:latest
+        image: maroua20/spring-image-jenkins:${BUILD_NUMBER}
         args:
          - touch /tmp/healthy; sleep 30; rm -rf /tmp/healthy; sleep 600       
         imagePullPolicy: Always
